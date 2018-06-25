@@ -1,14 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
-    <StudentsComponent></StudentsComponent>
+    <!-- <StudentsComponent></StudentsComponent> -->
   </div>
 </template>
 
 <script>
+import StudentsComponent from './components/StudentsComponent';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    StudentsComponent,
+  },
+  data () {
+    return {
+    }
+  },
 }
 </script>
 
@@ -19,6 +27,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

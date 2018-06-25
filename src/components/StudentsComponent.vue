@@ -1,33 +1,40 @@
 <template>
   <div class="hello">
     <h1>Students</h1>
+    <ul>
+      <li v-for="student in students" :key="student.id">
+        {{student.name}} |
+        <i>{{student.games.length}} Favorite Games</i>
+        <button>Team A</button>
+        <button>Team B</button>
+        <!-- {{student.selected}} -->
+      </li>
+
+
+    </ul>
   </div>
 </template>
 
 <script>
+import data from '../api/data.js';
+
 export default {
-  name: 'StudentsComponent',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      students: []
     }
+  },
+  created() {
+    this.students = data.getStudents();
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+
 a {
   color: #42b983;
 }
