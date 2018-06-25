@@ -9,23 +9,21 @@
         <button>Team B</button>
         <!-- {{student.selected}} -->
       </li>
-
-
     </ul>
   </div>
 </template>
 
 <script>
-import data from '../api/data.js';
+import store from '../store/index.js';
 
 export default {
-  data() {
-    return {
-      students: []
-    }
+  computed: { // store your methods
+  students(){
+    return store.state.students;
+   }
   },
-  created() {
-    this.students = data.getStudents();
+  created() { // hook
+    store.dispatch('getStudents');
   }
 };
 </script>
