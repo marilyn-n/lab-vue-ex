@@ -10,13 +10,19 @@
         <!-- {{student.selected}} -->
       </li>
     </ul>
+    <hr />
+    <TeamComponent></TeamComponent>
   </div>
 </template>
 
 <script>
+import TeamComponent from '../components/TeamComponent';
 import store from '../store/index.js';
 
 export default {
+  components:{
+    TeamComponent,
+  },
   computed: { // store your methods
   students(){
     return store.state.students;
