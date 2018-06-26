@@ -2,21 +2,22 @@
   <div class="hello">
     <h1>Students</h1>
     <ul>
-      <li v-for="student in students" :key="student.id">
+      <li v-for="(student, index) in students" :key="student.id">
         {{student.name}} |
         <i>{{student.games.length}} Favorite Games</i>
-        <button>Team A</button>
-        <button>Team B</button>
+        <button v-on:click="addTeamMember('A', index)" >Team A</button>
+        <button v-on:click="addTeamMember('B', index)">Team B</button>
         <!-- {{student.selected}} -->
       </li>
-    </ul>
+    </ul> 
     <hr />
-    <TeamComponent></TeamComponent>
+    <TeamComponent type='A'>Team A</TeamComponent>
+    <TeamComponent type='B'> Team B</TeamComponent>
   </div>
 </template>
 
 <script>
-import TeamComponent from '../components/TeamComponent';
+import TeamComponent from '../components/TeamComponent.vue';
 import store from '../store/index.js';
 
 export default {
@@ -27,6 +28,12 @@ export default {
   students(){
     return store.state.students;
    }
+  },
+  methods:{
+    addTeamMember(id, index){
+      store.dispatch('addTeamMember', {id, index});
+    }
+
   },
   created() { // hook
     store.dispatch('getStudents');

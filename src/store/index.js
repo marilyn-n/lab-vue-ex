@@ -8,6 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: { // date
     students: [],
+    teamA: [],
+    teamB: [],
   },
   getters: { // computed properties
 
@@ -15,6 +17,9 @@ export default new Vuex.Store({
   actions: { // methods
     getStudents(context) {
       context.commit('setStudents');
+    },
+    addTeamMember(context, data) {
+      console.log(data);
     },
 
   },

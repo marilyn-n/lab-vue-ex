@@ -1,12 +1,14 @@
 <template>
 <div class="team">
-<h1>Team</h1>
+<h1>Team {{type}}</h1>
+
 </div>
   
 </template>
 
 <script>
 export default {
+  props: ['type']
   
 }
 </script>
