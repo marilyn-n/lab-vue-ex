@@ -30,8 +30,8 @@ export default {
    }
   },
   methods:{
-    addTeamMember(id, index){
-      store.dispatch('addTeamMember', {id, index});
+    addTeamMember(type, index){
+      store.dispatch('addTeamMember', {type, index});
     }
 
   },
