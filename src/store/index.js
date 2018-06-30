@@ -28,7 +28,6 @@ export default new Vuex.Store({
     removeFromTeam(context, data) {
       context.commit('disableSelectedState', data);
       context.commit('spliceFromTeam', data);
-
     },
 
   },
@@ -49,11 +48,13 @@ export default new Vuex.Store({
       state.students[index].selected = true;
     },
 
-    disableSelectedState(state, index) {
-      state.students[index].selected = false;
+    disableSelectedState(state, data) {
+      state.students.forEach((student) => {
+        student.id === data.member.id ? student.selected = false : "";
+      });
     },
 
-    spliceFromTeam() {
+    spliceFromTeam(state, data) {
       if (data.type === 'A') {
         state.teamA.splice(data.index, 1);
       } else {

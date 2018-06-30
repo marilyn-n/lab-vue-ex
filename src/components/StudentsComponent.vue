@@ -5,8 +5,8 @@
       <li v-for="(student, index) in students" :key="student.id">
         {{student.name}} |
         <i>{{student.games.length}} Favorite Games</i>
-        <button v-on:click="addTeamMember('A', index)" :disabled="student.selected" >Team A</button>
-        <button v-on:click="addTeamMember('B', index)" :disabled="student.selected">Team B</button>
+        <button v-on:click="addTeamMember({type: 'A', index})" :disabled="student.selected" >Team A</button>
+        <button v-on:click="addTeamMember({type: 'B', index})" :disabled="student.selected">Team B</button>
         <!-- {{student.selected}} -->
       </li>
     </ul> 
@@ -19,24 +19,20 @@
 <script>
 import TeamComponent from '../components/TeamComponent.vue';
 import store from '../store/index.js';
+import { mapState, mapActions } from "vuex";
 
 export default {
   components:{
     TeamComponent,
   },
-  computed: { // store your methods
-  students(){
-    return store.state.students;
-   }
+  computed: {
+  ...mapState(["students"])
   },
   methods:{
-    addTeamMember(type, index){
-      store.dispatch('addTeamMember', {type, index});
-    }
-
+    ...mapActions(["addTeamMember"])
   },
-  created() { // hook
-    store.dispatch('getStudents');
+  created() {
+    this.$store.dispatch('getStudents');
   }
 };
 </script>
