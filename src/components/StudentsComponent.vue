@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Students</h1>
+    <h1>Students - Total is {{studentCount}}</h1>
     <ul>
       <li v-for="(student, index) in students" :key="student.id">
         {{student.name}} |
@@ -19,14 +19,15 @@
 <script>
 import TeamComponent from '../components/TeamComponent.vue';
 import store from '../store/index.js';
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   components:{
     TeamComponent,
   },
   computed: {
-  ...mapState(["students"])
+  ...mapState(["students"]),
+  ...mapGetters(['studentCount'])
   },
   methods:{
     ...mapActions(["addTeamMember"])
