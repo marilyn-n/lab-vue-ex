@@ -14,12 +14,21 @@ export default new Vuex.Store({
   getters: { // computed properties
 
   },
-  actions: { // methods
+
+  actions: { // methods click events
     getStudents(context) {
       context.commit('setStudents');
     },
+
     addTeamMember(context, data) {
       context.commit('pushMemberToTeam', data);
+      context.commit('enableSelectedState', data.index);
+    },
+
+    removeFromTeam(context, data) {
+      context.commit('disableSelectedState', data);
+      context.commit('spliceFromTeam', data);
+
     },
 
   },
@@ -27,6 +36,7 @@ export default new Vuex.Store({
     setStudents(state) {
       state.students = data.getStudents();
     },
+
     pushMemberToTeam(state, data) {
       if (data.type === 'A') {
         state.teamA.push(state.students[data.index]);
@@ -34,6 +44,23 @@ export default new Vuex.Store({
         state.teamB.push(state.students[data.index]);
       }
     },
+
+    enableSelectedState(state, index) {
+      state.students[index].selected = true;
+    },
+
+    disableSelectedState(state, index) {
+      state.students[index].selected = false;
+    },
+
+    spliceFromTeam() {
+      if (data.type === 'A') {
+        state.teamA.splice(data.index, 1);
+      } else {
+        state.teamB.splice(data.index, 1);
+      }
+    },
+
   },
 
 });
